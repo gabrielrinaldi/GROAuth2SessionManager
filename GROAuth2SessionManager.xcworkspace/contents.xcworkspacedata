@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:GROAuth2SessionManager"
+      name = "GROAuth2SessionManager">
+      <FileRef
+         location = "group:AFOAuthCredential.h">
+      </FileRef>
+      <FileRef
+         location = "group:AFOAuthCredential.m">
+      </FileRef>
+      <FileRef
+         location = "group:GROAuth2SessionManager.h">
+      </FileRef>
+      <FileRef
+         location = "group:GROAuth2SessionManager.m">
+      </FileRef>
+   </Group>
+</Workspace>

@@ -66,10 +66,6 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
         [self setClientID:clientID];
         [self setSecret:secret];
         [self setOAuthURL:oAuthURL];
-
-        AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-        [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [self setRequestSerializer:serializer];
     }
 
     return self;
@@ -145,9 +141,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
 
     parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
 
-    AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
-    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [self setRequestSerializer:serializer];
+    [[self requestSerializer] clearAuthorizationHeader];
 
     NSString *urlString;
     if ([self oAuthURL]) {

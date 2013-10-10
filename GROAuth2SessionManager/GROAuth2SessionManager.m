@@ -141,8 +141,6 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
 
     parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
 
-    [[self requestSerializer] clearAuthorizationHeader];
-
     NSString *urlString;
     if ([self oAuthURL]) {
         urlString = [[NSURL URLWithString:path relativeToURL:[self oAuthURL]] absoluteString];
@@ -150,7 +148,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
         urlString = [[NSURL URLWithString:path relativeToURL:[self baseURL]] absoluteString];
     }
 
-    NSMutableURLRequest *mutableRequest = [[self requestSerializer] requestWithMethod:@"POST" URLString:urlString parameters:parameters];
+    NSMutableURLRequest *mutableRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:urlString parameters:parameters];
 
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:mutableRequest];
     [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];

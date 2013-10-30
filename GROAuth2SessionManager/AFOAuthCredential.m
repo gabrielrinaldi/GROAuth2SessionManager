@@ -28,6 +28,9 @@ NSString * const kAFOAuthCredentialServiceName = @"AFOAuthCredentialService";
 static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *identifier) {
     NSMutableDictionary *queryDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:(__bridge id)kSecClassGenericPassword, kSecClass, kAFOAuthCredentialServiceName, kSecAttrService, nil];
     [queryDictionary setValue:identifier forKey:(__bridge id)kSecAttrAccount];
+    if (&kSecAttrSynchronizable != NULL) {
+        [queryDictionary setObject:@YES forKey:(__bridge id)kSecAttrSynchronizable];
+    }
 
     return queryDictionary;
 }
@@ -105,6 +108,9 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
     NSMutableDictionary *updateDictionary = [NSMutableDictionary dictionary];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:credential];
     [updateDictionary setObject:data forKey:(__bridge id)kSecValueData];
+    if (&kSecAttrSynchronizable != NULL) {
+        [updateDictionary setObject:@YES forKey:(__bridge id)kSecAttrSynchronizable];
+    }
 
     OSStatus status;
     BOOL exists = ([self retrieveCredentialWithIdentifier:identifier] != nil);
@@ -139,6 +145,9 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
     NSMutableDictionary *queryDictionary = AFKeychainQueryDictionaryWithIdentifier(identifier);
     [queryDictionary setObject:(__bridge id)kCFBooleanTrue forKey:(__bridge id)kSecReturnData];
     [queryDictionary setObject:(__bridge id)kSecMatchLimitOne forKey:(__bridge id)kSecMatchLimit];
+    if (&kSecAttrSynchronizable != NULL) {
+        [queryDictionary setObject:@YES forKey:(__bridge id)kSecAttrSynchronizable];
+    }
 
     CFDataRef result = nil;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)queryDictionary, (CFTypeRef *)&result);

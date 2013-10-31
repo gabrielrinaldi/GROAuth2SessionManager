@@ -92,7 +92,7 @@
 
 #ifdef _SECURITY_SECITEM_H_
 /**
- Stores the specified OAuth credential for a given web service identifier in the Keychain.
+ Stores the specified OAuth credential for a given web service identifier in the Keychain with the default Keychain Accessibilty of kSecAttrAccessibleWhenUnlocked and without iCloud support.
 
  @param credential The OAuth credential to be stored.
  @param identifier The service identifier associated with the specified credential.
@@ -101,6 +101,31 @@
  */
 + (BOOL)storeCredential:(AFOAuthCredential *)credential
          withIdentifier:(NSString *)identifier;
+
+/**
+ Stores the specified OAuth credential for a given web service identifier in the Keychain with the default Keychain Accessibilty of kSecAttrAccessibleWhenUnlocked.
+
+ @param credential The OAuth credential to be stored.
+ @param identifier The service identifier associated with the specified credential.
+ @param shouldUseICloud Wheter ir should try to use iCloud.
+
+ @return Whether or not the credential was stored in the keychain.
+ */
++ (BOOL)storeCredential:(AFOAuthCredential *)credential
+         withIdentifier:(NSString *)identifier useICloud:(BOOL)shouldUseICloud;
+
+/**
+ Stores the specified OAuth credential for a given web service identifier in the Keychain.
+
+ @param credential The OAuth credential to be stored.
+ @param identifier The service identifier associated with the specified credential.
+ @param securityAccessibility The Keychain security accessibility to store the credential with.
+ @param shouldUseICloud Wheter ir should try to use iCloud.
+
+ @return Whether or not the credential was stored in the keychain.
+ */
++ (BOOL)storeCredential:(AFOAuthCredential *)credential
+         withIdentifier:(NSString *)identifier withAccessibility:(id)securityAccessibility useICloud:(BOOL)shouldUseICloud;
 
 /**
  Retrieves the OAuth credential stored with the specified service identifier from the Keychain.
@@ -112,6 +137,16 @@
 + (AFOAuthCredential *)retrieveCredentialWithIdentifier:(NSString *)identifier;
 
 /**
+ Retrieves the OAuth credential stored with the specified service identifier from the Keychain.
+
+ @param identifier The service identifier associated with the specified credential.
+ @param shouldUseICloud Wheter ir should try to use iCloud.
+
+ @return The retrieved OAuth credential.
+ */
++ (AFOAuthCredential *)retrieveCredentialWithIdentifier:(NSString *)identifier useICloud:(BOOL)shouldUseICloud;
+
+/**
  Deletes the OAuth credential stored with the specified service identifier from the Keychain.
 
  @param identifier The service identifier associated with the specified credential.
@@ -119,6 +154,16 @@
  @return Whether or not the credential was deleted from the keychain.
  */
 + (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier;
+
+/**
+ Deletes the OAuth credential stored with the specified service identifier from the Keychain.
+
+ @param identifier The service identifier associated with the specified credential.
+ @param shouldUseICloud Wheter ir should try to use iCloud.
+
+ @return Whether or not the credential was deleted from the keychain.
+ */
++ (BOOL)deleteCredentialWithIdentifier:(NSString *)identifier useICloud:(BOOL)shouldUseICloud;
 #endif
 
 @end

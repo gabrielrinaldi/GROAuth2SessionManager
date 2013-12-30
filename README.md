@@ -21,6 +21,10 @@ GROAuth2SessionManager *sessionManager = [GROAuth2SessionManager clientWithBaseU
                                     }];
 ```
 
+## Documentation
+
+Documentation for all releases of GROAuth2SessionManager, including the latest, are [available on CocoaDocs](http://cocoadocs.org/docsets/GROAuth2SessionManager/).
+
 ## Contact
 
 Gabriel Rinaldi

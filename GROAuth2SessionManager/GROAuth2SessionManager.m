@@ -148,7 +148,13 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
         urlString = [[NSURL URLWithString:path relativeToURL:[self baseURL]] absoluteString];
     }
 
-    NSMutableURLRequest *mutableRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:urlString parameters:parameters];
+    NSError *error;
+    NSMutableURLRequest *mutableRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:urlString parameters:parameters error:&error];
+    if (error) {
+        failure(error);
+
+        return;
+    }
 
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:mutableRequest];
     [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];

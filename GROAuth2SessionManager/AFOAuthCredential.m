@@ -98,7 +98,12 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
 }
 
 + (BOOL)storeCredential:(AFOAuthCredential *)credential withIdentifier:(NSString *)identifier useICloud:(BOOL)shouldUseICloud {
-    return [self storeCredential:credential withIdentifier:identifier withAccessibility:(__bridge id)kSecAttrAccessibleWhenUnlocked useICloud:shouldUseICloud];
+    id securityAccessibility = nil;
+#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 43000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+    securityAccessibility = (__bridge id)kSecAttrAccessibleWhenUnlocked;
+#else
+    return [self storeCredential:credential withIdentifier:nil withAccessibility:securityAccessibility useICloud:shouldUseICloud];
+#endif
 }
 
 + (BOOL)storeCredential:(AFOAuthCredential *)credential
@@ -112,7 +117,9 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
     NSMutableDictionary *updateDictionary = [NSMutableDictionary dictionary];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:credential];
     [updateDictionary setObject:data forKey:(__bridge id)kSecValueData];
-    [updateDictionary setObject:securityAccessibility forKey:(__bridge id)kSecAttrAccessible];
+    if (securityAccessibility) {
+        [updateDictionary setObject:securityAccessibility forKey:(__bridge id)kSecAttrAccessible];
+    }
 
     if (shouldUseICloud && &kSecAttrSynchronizable != NULL) {
         [queryDictionary setObject:@YES forKey:(__bridge id)kSecAttrSynchronizable];

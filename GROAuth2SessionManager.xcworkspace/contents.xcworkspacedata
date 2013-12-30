@@ -4,17 +4,30 @@
    <Group
       location = "group:GROAuth2SessionManager"
       name = "GROAuth2SessionManager">
+      <Group
+         location = "container:"
+         name = "Classes">
+         <FileRef
+            location = "group:GROAuth2SessionManager/AFOAuthCredential.h">
+         </FileRef>
+         <FileRef
+            location = "group:GROAuth2SessionManager/AFOAuthCredential.m">
+         </FileRef>
+         <FileRef
+            location = "group:GROAuth2SessionManager/GROAuth2SessionManager.h">
+         </FileRef>
+         <FileRef
+            location = "group:GROAuth2SessionManager/GROAuth2SessionManager.m">
+         </FileRef>
+      </Group>
       <FileRef
-         location = "group:AFOAuthCredential.h">
+         location = "group:../GROAuth2SessionManager.podspec">
       </FileRef>
       <FileRef
-         location = "group:AFOAuthCredential.m">
+         location = "group:../LICENSE">
       </FileRef>
       <FileRef
-         location = "group:GROAuth2SessionManager.h">
-      </FileRef>
-      <FileRef
-         location = "group:GROAuth2SessionManager.m">
+         location = "group:../README.md">
       </FileRef>
    </Group>
 </Workspace>

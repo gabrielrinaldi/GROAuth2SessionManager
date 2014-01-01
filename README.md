@@ -42,3 +42,6 @@ Mattt Thompson
 ## License
 
 GROAuth2SessionManager is available under the MIT license. See the LICENSE file for more info.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gabrielrinaldi/groauth2sessionmanager/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

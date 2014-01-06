@@ -99,9 +99,8 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
     id securityAccessibility = nil;
 #if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 43000) || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
     securityAccessibility = (__bridge id)kSecAttrAccessibleWhenUnlocked;
-#else
-    return [self storeCredential:credential withIdentifier:nil withAccessibility:securityAccessibility useICloud:shouldUseICloud];
 #endif
+    return [self storeCredential:credential withIdentifier:nil withAccessibility:securityAccessibility useICloud:shouldUseICloud];
 }
 
 + (BOOL)storeCredential:(AFOAuthCredential *)credential

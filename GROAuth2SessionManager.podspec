@@ -1,17 +1,17 @@
 Pod::Spec.new do |s|
   s.name     = 'GROAuth2SessionManager'
-  s.version  = '0.1.4'
+  s.version  = '0.1.5'
   s.license  = 'MIT'
   s.summary  = 'AFNetworking Extension for OAuth 2 Authentication.'
   s.homepage = 'https://github.com/gabrielrinaldi/GROAuth2SessionManager'
   s.author   = { 'Gabriel Rinaldi' => 'gabriel@gabrielrinaldi.me', 'Mattt Thompson' => 'm@mattt.me' }
   s.source   = { :git => 'https://github.com/gabrielrinaldi/GROAuth2SessionManager.git',
-                 :tag => '0.1.4' }
+                 :tag => '0.1.5' }
   s.source_files = 'GROAuth2SessionManager'
   s.requires_arc = true
 
-  s.ios.deployment_target = '7.0'
-  s.osx.deployment_target = '10.9'
+  s.ios.deployment_target = '6.0'
+  s.osx.deployment_target = '10.8'
 
   s.dependency 'AFNetworking', '~> 2.0.0'
 

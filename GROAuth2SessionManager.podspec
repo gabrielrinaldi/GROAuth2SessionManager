@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.9'
 
-  s.dependency 'AFNetworking', :git => 'git@github.com:AFNetworking/AFNetworking.git'
+  s.dependency 'AFNetworking', '~> 2.1.0'
 
   s.ios.frameworks = 'Security'
 

@@ -46,7 +46,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
 #pragma mark - Initializers
 
 + (instancetype)managerWithBaseURL:(NSURL *)url clientID:(NSString *)clientID secret:(NSString *)secret {
-    return [GROAuth2SessionManager managerWithBaseURL:url oAuthURL:nil clientID:clientID secret:secret];
+    return [self managerWithBaseURL:url oAuthURL:nil clientID:clientID secret:secret];
 }
 
 + (instancetype)managerWithBaseURL:(NSURL *)url oAuthURL:(NSURL *)oAuthURL clientID:(NSString *)clientID secret:(NSString *)secret {

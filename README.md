@@ -6,7 +6,7 @@ GROAuth2SessionManager is an extension for [AFNetworking](http://github.com/AFNe
 
 ``` objective-c
 NSURL *url = [NSURL URLWithString:@"http://example.com/"];
-GROAuth2SessionManager *sessionManager = [GROAuth2SessionManager clientWithBaseURL:url clientID:kClientID secret:kClientSecret];
+GROAuth2SessionManager *sessionManager = [GROAuth2SessionManager managerWithBaseURL:url clientID:kClientID secret:kClientSecret];
 
 [sessionManager authenticateUsingOAuthWithPath:@"/oauth/token"
                                    username:@"username"

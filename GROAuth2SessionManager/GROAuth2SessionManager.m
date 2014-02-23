@@ -46,7 +46,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
 #pragma mark - Initializers
 
 + (instancetype)managerWithBaseURL:(NSURL *)url clientID:(NSString *)clientID secret:(NSString *)secret {
-    return [GROAuth2SessionManager managerWithBaseURL:url oAuthURL:nil clientID:clientID secret:secret];
+    return [self managerWithBaseURL:url oAuthURL:nil clientID:clientID secret:secret];
 }
 
 + (instancetype)managerWithBaseURL:(NSURL *)url oAuthURL:(NSURL *)oAuthURL clientID:(NSString *)clientID secret:(NSString *)secret {
@@ -123,11 +123,11 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
     [self authenticateUsingOAuthWithPath:path parameters:parameters success:success failure:failure];
 }
 
-- (void)authenticateUsingOAuthWithPath:(NSString *)path code:(NSString *)code redirectURI:(NSString *)uri success:(void (^)(AFOAuthCredential *))success failure:(void (^)(NSError *))failure {
+- (void)authenticateUsingOAuthWithPath:(NSString *)path code:(NSString *)code redirectURI:(NSString *)redirectURI success:(void (^)(AFOAuthCredential *))success failure:(void (^)(NSError *))failure {
     NSMutableDictionary *mutableParameters = [NSMutableDictionary dictionary];
     [mutableParameters setObject:kGROAuthCodeGrantType forKey:@"grant_type"];
     [mutableParameters setValue:code forKey:@"code"];
-    [mutableParameters setValue:uri forKey:@"redirect_uri"];
+    [mutableParameters setValue:redirectURI forKey:@"redirect_uri"];
 
     NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:mutableParameters];
 

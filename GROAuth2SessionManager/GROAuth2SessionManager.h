@@ -20,7 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#if __IPHONE_OS_VERSION_MIN_ALLOWED >= __IPHONE_7_0
 #import "AFHTTPSessionManager.h"
+#else
+#import "AFHTTPRequestOperationManager.h"
+#endif
 #import "AFOAuthCredential.h"
 
 #ifndef _SECURITY_SECITEM_H_
@@ -32,7 +36,11 @@
 
  @see RFC 6749 The OAuth 2.0 Authorization Framework: http://tools.ietf.org/html/rfc6749
  */
+#if __IPHONE_OS_VERSION_MIN_ALLOWED >= __IPHONE_7_0
 @interface GROAuth2SessionManager : AFHTTPSessionManager
+#else
+@interface GROAuth2SessionManager : AFHTTPRequestOperationManager
+#endif
 
 ///------------------------------------------
 /// @name Accessing OAuth 2 Client Properties
@@ -155,7 +163,7 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the OAuth credential returned by the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
-- (void)authenticateUsingOAuthWithPath:(NSString *)path code:(NSString *)code redirectURI:(NSString *)uri success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateUsingOAuthWithPath:(NSString *)path code:(NSString *)code redirectURI:(NSString *)redirectURI success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with the specified parameters.

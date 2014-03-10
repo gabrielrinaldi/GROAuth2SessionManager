@@ -32,6 +32,11 @@
 ///--------------------------------------
 
 /**
+ The response object that contained this Credential
+ */
+@property (nonatomic) id responseObject;
+
+/**
  The OAuth access token.
  */
 @property (readonly, nonatomic) NSString *accessToken;

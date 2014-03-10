@@ -157,6 +157,9 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
     }
 
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:mutableRequest];
+    requestOperation.shouldUseCredentialStorage = YES;
+    requestOperation.securityPolicy = [AFSecurityPolicy defaultPolicy];
+    requestOperation.securityPolicy.allowInvalidCertificates = YES;
     [requestOperation setResponseSerializer:[AFJSONResponseSerializer serializer]];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject valueForKey:@"error"]) {
@@ -175,6 +178,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
         }
 
         AFOAuthCredential *credential = [AFOAuthCredential credentialWithOAuthToken:[responseObject valueForKey:@"access_token"] tokenType:[responseObject valueForKey:@"token_type"]];
+        credential.responseObject = responseObject;
 
         NSDate *expireDate = nil;
         id expiresIn = [responseObject valueForKey:@"expires_in"];

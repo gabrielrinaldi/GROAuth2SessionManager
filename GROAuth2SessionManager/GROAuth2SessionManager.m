@@ -27,6 +27,7 @@ NSString * const kGROAuthCodeGrantType = @"authorization_code";
 NSString * const kGROAuthClientCredentialsGrantType = @"client_credentials";
 NSString * const kGROAuthPasswordCredentialsGrantType = @"password";
 NSString * const kGROAuthRefreshGrantType = @"refresh_token";
+NSString * const kGROAuthErrorFailingOperationKey = @"GROAuthErrorFailingOperation";
 
 #pragma mark GROAuth2SessionManager (Private)
 
@@ -191,6 +192,11 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
+            if(error) {
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:error.userInfo];
+                userInfo[kGROAuthErrorFailingOperationKey] = operation;
+                error = [NSError errorWithDomain:error.domain code:error.code userInfo:userInfo];
+            }
             failure(error);
         }
     }];

@@ -14,7 +14,7 @@ GROAuth2SessionManager *sessionManager = [GROAuth2SessionManager managerWithBase
                                       scope:@"email"
                                     success:^(AFOAuthCredential *credential) {
                                         NSLog(@"I have a token! %@", credential.accessToken);
-                                        [AFOAuthCredential storeCredential:credential withIdentifier:oauthClient.serviceProviderIdentifier];
+                                        [AFOAuthCredential storeCredential:credential withIdentifier:sessionManager.serviceProviderIdentifier];
                                     }
                                     failure:^(NSError *error) {
                                         NSLog(@"Error: %@", error);

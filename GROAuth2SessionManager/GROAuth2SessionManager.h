@@ -31,6 +31,11 @@
 #warning Security framework not found in project, or not included in precompiled header. Keychain persistence functionality will not be available.
 #endif
 
+@class AFHTTPRequestOperation;
+
+typedef void(^GROAuth2SessionManagerAuthenticateSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject, AFOAuthCredential *credential);
+typedef void(^GROAuth2SessionManagerAuthenticateFailureBlock)(AFHTTPRequestOperation *operation, id responseObject, NSError *error);
+
 /**
  `GROAuth2SessionManager` encapsulates common patterns to authenticate against a resource server conforming to the behavior outlined in the OAuth 2.0 specification.
 
@@ -132,7 +137,7 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the OAuth credential returned by the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
-- (void)authenticateUsingOAuthWithPath:(NSString *)path username:(NSString *)username password:(NSString *)password scope:(NSString *)scope success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateUsingOAuthWithPath:(NSString *)path username:(NSString *)username password:(NSString *)password scope:(NSString *)scope success:(GROAuth2SessionManagerAuthenticateSuccessBlock)success failure:(GROAuth2SessionManagerAuthenticateFailureBlock)failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with a designated scope.
@@ -142,7 +147,7 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the OAuth credential returned by the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
-- (void)authenticateUsingOAuthWithPath:(NSString *)path scope:(NSString *)scope success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateUsingOAuthWithPath:(NSString *)path scope:(NSString *)scope success:(GROAuth2SessionManagerAuthenticateSuccessBlock)success failure:(GROAuth2SessionManagerAuthenticateFailureBlock)failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server using the specified refresh token.
@@ -152,7 +157,7 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the OAuth credential returned by the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
-- (void)authenticateUsingOAuthWithPath:(NSString *)path refreshToken:(NSString *)refreshToken success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateUsingOAuthWithPath:(NSString *)path refreshToken:(NSString *)refreshToken success:(GROAuth2SessionManagerAuthenticateSuccessBlock)success failure:(GROAuth2SessionManagerAuthenticateFailureBlock)failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with an authorization code, redirecting to a specified URI upon successful authentication.
@@ -163,7 +168,7 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the OAuth credential returned by the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
-- (void)authenticateUsingOAuthWithPath:(NSString *)path code:(NSString *)code redirectURI:(NSString *)redirectURI success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateUsingOAuthWithPath:(NSString *)path code:(NSString *)code redirectURI:(NSString *)redirectURI success:(GROAuth2SessionManagerAuthenticateSuccessBlock)success failure:(GROAuth2SessionManagerAuthenticateFailureBlock)failure;
 
 /**
  Creates and enqueues an `AFHTTPRequestOperation` to authenticate against the server with the specified parameters.
@@ -173,6 +178,6 @@
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes a single argument: the OAuth credential returned by the server.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes a single argument: the error returned from the server.
  */
-- (void)authenticateUsingOAuthWithPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
+- (void)authenticateUsingOAuthWithPath:(NSString *)path parameters:(NSDictionary *)parameters success:(GROAuth2SessionManagerAuthenticateSuccessBlock)success failure:(GROAuth2SessionManagerAuthenticateFailureBlock)failure;
 
 @end

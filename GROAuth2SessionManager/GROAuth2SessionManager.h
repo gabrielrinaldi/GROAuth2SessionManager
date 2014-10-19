@@ -176,3 +176,17 @@
 - (void)authenticateUsingOAuthWithPath:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(AFOAuthCredential *credential))success failure:(void (^)(NSError *error))failure;
 
 @end
+
+///----------------
+/// @name Constants
+///----------------
+
+/**
+ ## Error Information Keys
+
+  The following key is given in the `userInfo` dictionary of the NSError object passeed to the `failure` block object executed when a request operation finished unsuccessfully.
+
+
+ `kGROAuth2ErrorFailingOperationKey`: The failing AFHTTPRequestOperation object.
+ */
+extern NSString * const kGROAuthErrorFailingOperationKey;

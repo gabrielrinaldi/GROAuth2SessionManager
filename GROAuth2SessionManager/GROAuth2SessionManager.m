@@ -191,7 +191,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (failure) {
-            failure(operation, nil, error);
+            failure(operation, operation.responseObject, error);
         }
     }];
 

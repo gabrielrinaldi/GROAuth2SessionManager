@@ -37,8 +37,6 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
 @interface AFOAuthCredential ()
 @property (readwrite, nonatomic) NSString *accessToken;
 @property (readwrite, nonatomic) NSString *tokenType;
-@property (readwrite, nonatomic) NSString *refreshToken;
-@property (readwrite, nonatomic) NSDate *expiration;
 @end
 
 @implementation AFOAuthCredential
@@ -77,12 +75,15 @@ static NSMutableDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *i
 - (void)setRefreshToken:(NSString *)refreshToken
              expiration:(NSDate *)expiration
 {
-    if (!refreshToken || !expiration) {
-        return;
-    }
-
     self.refreshToken = refreshToken;
     self.expiration = expiration;
+}
+
+- (void)setExpiration:(NSDate *)expiration
+{
+    NSParameterAssert(expiration);
+    
+    _expiration = expiration;
 }
 
 - (BOOL)isExpired {

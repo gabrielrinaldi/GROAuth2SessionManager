@@ -170,20 +170,22 @@ NSString * const kGROAuthErrorFailingOperationKey = @"GROAuthErrorFailingOperati
             return;
         }
 
+        AFOAuthCredential *credential = [AFOAuthCredential credentialWithOAuthToken:[responseObject valueForKey:@"access_token"] tokenType:[responseObject valueForKey:@"token_type"]];
+        
         NSString *refreshToken = [responseObject valueForKey:@"refresh_token"];
         if (refreshToken == nil || [refreshToken isEqual:[NSNull null]]) {
             refreshToken = [parameters valueForKey:@"refresh_token"];
         }
-
-        AFOAuthCredential *credential = [AFOAuthCredential credentialWithOAuthToken:[responseObject valueForKey:@"access_token"] tokenType:[responseObject valueForKey:@"token_type"]];
+        
+        credential.refreshToken = refreshToken;
 
         NSDate *expireDate = [NSDate distantFuture];
         id expiresIn = [responseObject valueForKey:@"expires_in"];
         if (expiresIn != nil && ![expiresIn isEqual:[NSNull null]]) {
             expireDate = [NSDate dateWithTimeIntervalSinceNow:[expiresIn doubleValue]];
         }
-
-        [credential setRefreshToken:refreshToken expiration:expireDate];
+        
+        credential.expiration = expireDate;
 
         [self setAuthorizationHeaderWithCredential:credential];
 

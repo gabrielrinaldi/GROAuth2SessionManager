@@ -44,7 +44,12 @@
 /**
  The OAuth refresh token.
  */
-@property (readonly, nonatomic) NSString *refreshToken;
+@property (copy, nonatomic) NSString *refreshToken;
+
+/**
+ The expiration of the access token. This must not be `nil`.
+ */
+@property (strong, nonatomic) NSDate *expiration;
 
 /**
  Whether the OAuth credentials are expired.
@@ -84,7 +89,8 @@
  @param expiration The expiration of the access token. This must not be `nil`.
  */
 - (void)setRefreshToken:(NSString *)refreshToken
-             expiration:(NSDate *)expiration;
+             expiration:(NSDate *)expiration
+__deprecated_msg("use refreshToken and expiration instead.");
 
 ///-----------------------------------------
 /// @name Storing and Retrieving Credentials

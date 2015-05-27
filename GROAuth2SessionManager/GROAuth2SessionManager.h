@@ -112,6 +112,21 @@
 - (id)initWithBaseURL:(NSURL *)url oAuthURL:(NSURL *)oAuthURL clientID:(NSString *)clientID secret:(NSString *)secret;
 
 /**
+ Initializes an `GROAuth2SessionManager` object with the specified base URL, client identifier, and secret.
+
+This is the designated initializer.
+
+ @param url The base URL for the HTTP client. This argument must not be `nil`.
+ @param configuration The configuration used to create the managed session.
+ @param oAuthURL The OAuth URL for the HTTP client if different than the base URL.
+ @param clientID The client identifier issued by the authorization server, uniquely representing the registration information provided by the client.
+ @param secret The client secret.
+
+ @return The newly-initialized OAuth 2 manager
+ */
+- (id)initWithBaseURL:(NSURL *)url sessionConfiguration:(NSURLSessionConfiguration *)configuration oAuthURL:(NSURL *)oAuthURL clientID:(NSString *)clientID secret:(NSString *)secret;
+
+/**
  Sets the "Authorization" HTTP header set in request objects made by the HTTP client to a basic authentication value with Base64-encoded username and password. This overwrites any existing value for this header.
 
  @param credential The OAuth credential
